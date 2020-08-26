@@ -50,6 +50,8 @@ namespace GCBot
             await client.LoginAsync(TokenType.Bot, config["DiscordToken"]);
             await client.StartAsync();
 
+            var token = new TokenService(config);
+
             await Task.Delay(-1);
         }
 
@@ -60,6 +62,7 @@ namespace GCBot
                 .AddSingleton(client)
                 .AddSingleton(commands)
                 .AddSingleton<CommandHandler>()
+                .AddSingleton<TokenService>()
                 .BuildServiceProvider()
                 ;
         }

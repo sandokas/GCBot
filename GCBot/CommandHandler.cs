@@ -13,12 +13,14 @@ namespace GCBot
     {
         private readonly DiscordSocketClient client;
         private readonly CommandService commands;
+        private readonly IServiceProvider services;
 
         // Retrieve client and CommandService instance via ctor
         public CommandHandler(IServiceProvider services)
         {
             this.commands = services.GetRequiredService<CommandService>();
             this.client = services.GetRequiredService<DiscordSocketClient>();
+            this.services = services;
         }
 
         public async Task InstallCommandsAsync()
@@ -35,7 +37,7 @@ namespace GCBot
             // If you do not use Dependency Injection, pass null.
             // See Dependency Injection guide for more information.
             await commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(),
-                                            services: null);
+                                            services: services);
         }
 
         private async Task HandleCommandAsync(SocketMessage messageParam)
@@ -61,7 +63,7 @@ namespace GCBot
             await commands.ExecuteAsync(
                 context: context,
                 argPos: argPos,
-                services: null);
+                services: services);
         }
     }
 }
