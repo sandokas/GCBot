@@ -68,7 +68,8 @@ namespace GCBot
             {
                 if (currentRole.Name == requestedToken.LongName)
                 {
-                    await ReplyAsync($"{user.Username} already supports {requestedToken.LongName}.");
+                    result += $"{user.Username} already supports {requestedToken.LongName}.";
+                    await ReplyAsync(result);
                     return;
                 }
                 if (tokens.Tokens.FirstOrDefault(t => t.LongName == currentRole.Name) != null)
