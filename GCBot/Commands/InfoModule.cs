@@ -38,9 +38,10 @@ namespace GCBot
 
             await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
         }
-        [Command("getrole")]
+
+        [Command("addrole")]
         [Summary("Gives you a role so you can show your affection towards your favorite GC Token.")]
-        [Alias("role", "token")]
+        [Alias("support", "token")]
         public async Task GetRoleAsync(
             [Summary("Your favorite GC token")]
             string input)
@@ -48,9 +49,17 @@ namespace GCBot
             var user = Context.User;
 
             var requestedToken = tokens.Tokens.FirstOrDefault(t => t.ShortName == input || t.LongName == input);
-            if  (requestedToken == null)
+            if (requestedToken == null)
             {
-                await ReplyAsync($"{input} is not a Role you can select through this command."); 
+                string rolesList = "";
+                foreach (var token in tokens.Tokens)
+                {
+                    if (rolesList != "")
+                        rolesList += ", ";
+                    rolesList += token.ShortName;
+                }
+                await ReplyAsync($"{input} is not a Role you can select through this command.\r\nThe following roles are available: {rolesList}.");
+
                 return;
             }
 
@@ -58,7 +67,7 @@ namespace GCBot
 
             if (role == null)
             {
-                await ReplyAsync($"{input} is not a Role you can select through this command.");
+                await ReplyAsync($"{input} seems to be improperly created, you should complain to the Game Master.");
                 return;
             }
 
@@ -84,6 +93,24 @@ namespace GCBot
             result += $"{user.Username} now supports {requestedToken.LongName}.";
             await ReplyAsync(result);
         }
+        [Command("remrole")]
+        [Summary("Removes your favorite GC Token role.")]
+        [Alias("remsupport", "remtoken")]
+        public async Task RemoveRoleAsync()
+        {
+            var user = Context.User;
+            string result = "";
+            foreach (var currentRole in (user as SocketGuildUser).Roles)
+            {
+                if (tokens.Tokens.FirstOrDefault(t => t.LongName == currentRole.Name) != null)
+                {
+                    await (user as SocketGuildUser).RemoveRoleAsync(currentRole);
+                    if (result != "")
+                        result += "\r\n";
+                    result += $"{user.Username} no longer supports {currentRole.Name}.";
+                }
+            }
+            await ReplyAsync(result);
+        }
     }
-
 }
