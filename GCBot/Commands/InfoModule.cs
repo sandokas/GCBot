@@ -39,6 +39,57 @@ namespace GCBot
             await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
         }
 
+        [Command("listusers")]
+        [Summary("Returns list of users with given role.")]
+        public async Task ListUsersByRoleAsync(
+            [Summary("The role name to list")]
+            string roleName = null)
+        {
+            var requestedToken = tokens.Tokens.FirstOrDefault(t => t.ShortName == roleName || t.LongName == roleName);
+            if (requestedToken == null)
+            {
+                string rolesList = "";
+                foreach (var token in tokens.Tokens)
+                {
+                    if (rolesList != "")
+                        rolesList += ", ";
+                    rolesList += token.ShortName;
+                }
+                await ReplyAsync($"{roleName} is not a Role you can select through this command.\r\nThe following roles are available: {rolesList}.");
+
+                return;
+            }
+
+            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == requestedToken.LongName);
+
+            if (role == null)
+            {
+                await ReplyAsync($"{roleName} seems to be improperly created, you should complain to the Game Master.");
+                return;
+            }
+
+            var users = Context.Guild.Users;
+
+            var usersWithRole = new List<SocketGuildUser>();
+
+            foreach (var user in users)
+            {
+                foreach (var userRole in user.Roles)
+                {
+                    if (userRole.Id == role.Id)
+                        usersWithRole.Add(user);
+                }
+            }
+
+            string usersList = "";
+            foreach (var user in usersWithRole)
+            {
+                usersList += "\r\n";
+                usersList += user.Nickname ?? user.Username + "#" + user.Discriminator;
+            }
+            await ReplyAsync($"{role.Name} has the following users: {usersList}");
+        }
+
         [Command("addrole")]
         [Summary("Gives you a role so you can show your affection towards your favorite GC Token.")]
         [Alias("support", "token")]
@@ -93,6 +144,7 @@ namespace GCBot
             result += $"{user.Username} now supports {requestedToken.LongName}.";
             await ReplyAsync(result);
         }
+
         [Command("remrole")]
         [Summary("Removes your favorite GC Token role.")]
         [Alias("remsupport", "remtoken")]
