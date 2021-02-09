@@ -37,7 +37,8 @@ namespace GCBot
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
-                .AddJsonFile(path: "appsettings.json");
+                .AddJsonFile(path: "appsettings.json")
+                .AddJsonFile(path: "regiments.json");
 
             config = builder.Build();
 

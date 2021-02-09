@@ -68,7 +68,17 @@ namespace GCBot
                 return;
             }
 
-            var users = Context.Guild.Users;
+            //var users = Context.Guild.Users;
+            var guild = Context.Guild;
+            //await guild.DownloadUsersAsync();
+
+            if (!guild.HasAllMembers)
+            {
+                await ReplyAsync($"Discord didn't let us download the entire user list. This command is out of commission until this works again. Sorry. (HasAllMembers:false)");
+                return;
+            }
+
+            var users = guild.Users;
 
             var usersWithRole = new List<SocketGuildUser>();
 
@@ -123,7 +133,6 @@ namespace GCBot
             }
 
             string result = "";
-
             foreach (var currentRole in (user as SocketGuildUser).Roles)
             {
                 if (currentRole.Name == requestedToken.LongName)
@@ -163,6 +172,14 @@ namespace GCBot
                 }
             }
             await ReplyAsync(result);
+        }
+        [Command("remrole")]
+        [Summary("Removes your favorite GC Token role.")]
+        [Alias("remsupport", "remtoken")]
+        public async Task RemoveRoleAsync(
+            string toDiscard)
+        {
+            await RemoveRoleAsync();
         }
     }
 }
