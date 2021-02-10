@@ -22,6 +22,7 @@ namespace GCBot
             client = new DiscordSocketClient(
                 new DiscordSocketConfig
                 {
+                    AlwaysDownloadUsers = true,
                     MessageCacheSize = 100,
                 });
 
