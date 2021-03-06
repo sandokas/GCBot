@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using Victoria;
 
 namespace GCBot
 {
@@ -13,6 +14,7 @@ namespace GCBot
     {
         private readonly DiscordSocketClient client;
         private readonly CommandService commands;
+        private readonly LavaNode lava;
         private readonly IConfiguration config;
         private readonly IServiceProvider services;
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
@@ -33,6 +35,13 @@ namespace GCBot
                     CaseSensitiveCommands = false,
                 });
 
+            lava = new LavaNode(client,
+                new LavaConfig
+                {
+                    SelfDeaf = false
+                }
+                );
+
             client.Log += Log;
             commands.Log += Log;
 
@@ -49,12 +58,22 @@ namespace GCBot
         {
             await services.GetRequiredService<CommandHandler>().InstallCommandsAsync();
 
+            client.Ready += OnReadyAsync;
+
             await client.LoginAsync(TokenType.Bot, config["DiscordToken"]);
             await client.StartAsync();
 
             var token = new TokenService(config);
 
             await Task.Delay(-1);
+        }
+
+        private async Task OnReadyAsync()
+        {
+            if (!lava.IsConnected)
+            {
+                await lava.ConnectAsync();
+            }
         }
 
         private IServiceProvider ConfigureServices()
@@ -65,6 +84,7 @@ namespace GCBot
                 .AddSingleton(commands)
                 .AddSingleton<CommandHandler>()
                 .AddSingleton<TokenService>()
+                .AddSingleton(lava)
                 .BuildServiceProvider()
                 ;
         }
