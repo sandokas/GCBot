@@ -39,6 +39,22 @@ namespace GCBot
             await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
         }
 
+        [Command("listroles")]
+        [Summary("Returns list of available roles.")]
+        public async Task ListRolesAsync()
+        {
+            string rolesList = "";
+            foreach (var token in tokens.Tokens)
+            {
+                if (rolesList != "")
+                    rolesList += ", ";
+                rolesList += token.ShortName;
+            }
+            await ReplyAsync($"The following roles are available: {rolesList}.");
+
+            return;
+        }
+
         [Command("listusers")]
         [Summary("Returns list of users with given role.")]
         public async Task ListUsersByRoleAsync(
