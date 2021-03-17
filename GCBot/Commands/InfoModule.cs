@@ -25,7 +25,12 @@ namespace GCBot
         [Command("say")]
         [Summary("Echoes a message.")]
         public Task SayAsync([Remainder][Summary("The text to echo")] string echo)
-        => ReplyAsync($"Ain't your slave. You say: \"{echo}\" if You want.");
+        => ReplyAsync($"Ain't your slave. You say: \"{echo.Replace("@", "")}\" if You want.");
+
+        [Command("insult")]
+        [Summary("Insults someone or something.")]
+        public Task InsultAsync([Remainder][Summary("What you want to insult")] string target)
+        => ReplyAsync($"You don't need my help for that. You're managing to insult {target.Replace("@","")} just fine on your own.");
 
         [Command("userinfo")]
         [Summary("Returns info about the current user, or the user parameter, if one passed.")]
@@ -71,7 +76,7 @@ namespace GCBot
                         rolesList += ", ";
                     rolesList += token.ShortName;
                 }
-                await ReplyAsync($"{roleName} is not a Role you can select through this command.\r\nThe following roles are available: {rolesList}.");
+                await ReplyAsync($"{roleName.Replace("@", "")} is not a Role you can select through this command.\r\nThe following roles are available: {rolesList}.");
 
                 return;
             }
@@ -80,7 +85,7 @@ namespace GCBot
 
             if (role == null)
             {
-                await ReplyAsync($"{roleName} seems to be improperly created, you should complain to the Game Master.");
+                await ReplyAsync($"{roleName.Replace("@", "")} seems to be improperly created, you should complain to the Game Master.");
                 return;
             }
 
@@ -135,7 +140,7 @@ namespace GCBot
                         rolesList += ", ";
                     rolesList += token.ShortName;
                 }
-                await ReplyAsync($"{input} is not a Role you can select through this command.\r\nThe following roles are available: {rolesList}.");
+                await ReplyAsync($"{input.Replace("@", "")} is not a Role you can select through this command.\r\nThe following roles are available: {rolesList}.");
 
                 return;
             }
@@ -144,7 +149,7 @@ namespace GCBot
 
             if (role == null)
             {
-                await ReplyAsync($"{input} seems to be improperly created, you should complain to the Game Master.");
+                await ReplyAsync($"{input.Replace("@", "")} seems to be improperly created, you should complain to the Game Master.");
                 return;
             }
 
