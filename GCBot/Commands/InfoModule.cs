@@ -22,15 +22,20 @@ namespace GCBot
             tokens = services.GetRequiredService<TokenService>();
         }
 
-        [Command("say")]
-        [Summary("Echoes a message.")]
-        public Task SayAsync([Remainder][Summary("The text to echo")] string echo)
-        => ReplyAsync($"Ain't your slave. You say: \"{echo.Replace("@", "")}\" if You want.");
+        [Command("insult")]
+        [Summary("Insults someone or something.")]
+        public Task InsultAsync([Remainder][Summary("What you want to insult")] string input)
+        {
+            if (input.Contains("@"))
+                return ReplyAsync($"You can't insult that!");
+
+            return ReplyAsync($"You don't need my help for that. You're managing to insult {input} just fine on your own. Whatever that is...");
+        }
 
         [Command("insult")]
         [Summary("Insults someone or something.")]
-        public Task InsultAsync([Remainder][Summary("What you want to insult")] string target)
-        => ReplyAsync($"You don't need my help for that. You're managing to insult {target.Replace("@","")} just fine on your own.");
+        public Task InsultAsync([Remainder][Summary("What you want to insult")] SocketUser user)
+        => ReplyAsync($"You don't need my help for that. You're managing to insult {user.Mention} just fine on your own.");
 
         [Command("userinfo")]
         [Summary("Returns info about the current user, or the user parameter, if one passed.")]
