@@ -17,49 +17,63 @@ namespace GCBot
     public class InfoModule : ModuleBase<SocketCommandContext>
     {
         private ListService lists;
+        private string botChannel = "bot-commands";
         public InfoModule(IServiceProvider services)
         {
             lists = services.GetRequiredService<ListService>();
         }
 
+        [Command("hello")]
+        [Summary("Says hi to the bot.")]
+        public async Task InsultAsync()
+        {
+            if (Context.Channel.Name != "bot-commands")
+                return;
+            await ReplyAsync($"Hello, {Context.User.Mention}.");
+            return;
+        }
+
+
         [Command("insult")]
         [Summary("Insults someone or something.")]
-        public Task InsultAsync([Remainder][Summary("What you want to insult")] string input)
+        public async Task InsultAsync([Remainder][Summary("What you want to insult")] string input)
         {
-            if (input.Contains("@"))
-                return ReplyAsync($"You can't insult that!");
+            if (Context.Channel.Name != botChannel)
+                return;
 
-            return ReplyAsync(GetInsult(input));
+            if (input.Contains("@"))
+            {
+                await ReplyAsync($"You can't insult that!");
+                return;
+            }
+
+            
+            await ReplyAsync(GetInsult(input, Context.User));
+            return;
         }
 
         [Command("insult")]
         [Summary("Insults someone or something.")]
-        public Task InsultAsync([Remainder][Summary("What you want to insult")] SocketUser user)
+        public async Task InsultAsync([Remainder][Summary("What you want to insult")] SocketUser user)
         {
+            if (Context.Channel.Name != botChannel)
+                return;
 
             if (user.IsBot)
-                return ReplyAsync($"Insulting the Bots, really??");
+            {
+                await ReplyAsync ($"Insulting the Bots, really??");
+                return;
+            }
 
-            return ReplyAsync(GetInsult(user.Mention));
+            await ReplyAsync(GetInsult(user.Mention, Context.User));
+            return;
         }
 
-        private string GetInsult(string target)
+        private string GetInsult(string target, SocketUser user)
         {
             var i = (new Random()).Next(lists.Insults.Count);
 
-            return lists.Insults[i].Replace("#target#", target);
-        }
-
-        [Command("userinfo")]
-        [Summary("Returns info about the current user, or the user parameter, if one passed.")]
-        [Alias("user", "whois")]
-        public async Task UserInfoAsync(
-            [Summary("The (optional) user to get info from")]
-            SocketUser user = null)
-        {
-            var userInfo = user ?? Context.Client.CurrentUser;
-
-            await ReplyAsync($"{userInfo.Username}#{userInfo.Discriminator}");
+            return lists.Insults[i].Replace("#target#", target).Replace("#user#", user.Mention);
         }
 
         [Command("listroles")]
@@ -67,6 +81,9 @@ namespace GCBot
         [Alias("list")]
         public async Task ListRolesAsync()
         {
+            if (Context.Channel.Name != botChannel)
+                return;
+
             string rolesList = "";
             foreach (var token in lists.Regiments)
             {
@@ -85,6 +102,9 @@ namespace GCBot
             [Summary("The role name to list")]
             SocketGuildUser user)
         {
+            if (Context.Channel.Name != botChannel)
+                return;
+
             var requestingUser = Context.User;
 
             #region Representative Officer permissions
@@ -150,6 +170,9 @@ namespace GCBot
             [Summary("The role name to list")]
             string roleName = null)
         {
+            if (Context.Channel.Name != botChannel)
+                return;
+
             var requestedToken = lists.Regiments.FirstOrDefault(t => t.ShortName == roleName || t.LongName == roleName);
             if (requestedToken == null)
             {
@@ -213,6 +236,9 @@ namespace GCBot
         [Alias("leave")]
         public async Task RemoveRoleAsync()
         {
+            if (Context.Channel.Name != botChannel)
+                return;
+
             var user = Context.User;
             string result = "";
             foreach (var currentRole in (user as SocketGuildUser).Roles)
@@ -242,6 +268,9 @@ namespace GCBot
         public async Task RemoveRoleAsync(
             SocketGuildUser user)
         {
+            if (Context.Channel.Name != botChannel)
+                return;
+
             var requestingUser = Context.User;
 
             if (((SocketGuildUser)Context.User) == user)
