@@ -39,7 +39,7 @@ namespace GCBot
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile(path: "appsettings.json")
-                .AddJsonFile(path: "regiments.json");
+                .AddJsonFile(path: "lists.json");
 
             config = builder.Build();
 
@@ -52,7 +52,7 @@ namespace GCBot
             await client.LoginAsync(TokenType.Bot, config["DiscordToken"]);
             await client.StartAsync();
 
-            var token = new TokenService(config);
+            var token = new ListService(config);
 
             await Task.Delay(-1);
         }
@@ -64,7 +64,7 @@ namespace GCBot
                 .AddSingleton(client)
                 .AddSingleton(commands)
                 .AddSingleton<CommandHandler>()
-                .AddSingleton<TokenService>()
+                .AddSingleton<ListService>()
                 .BuildServiceProvider()
                 ;
         }

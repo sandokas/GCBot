@@ -16,10 +16,10 @@ namespace GCBot
     // If it isn't, it will not be discovered by AddModulesAsync!
     public class InfoModule : ModuleBase<SocketCommandContext>
     {
-        private TokenService tokens;
+        private ListService lists;
         public InfoModule(IServiceProvider services)
         {
-            tokens = services.GetRequiredService<TokenService>();
+            lists = services.GetRequiredService<ListService>();
         }
 
         [Command("insult")]
@@ -45,17 +45,9 @@ namespace GCBot
 
         private string GetInsult(string target)
         {
-            var listInsults = new List<string>();
-            listInsults.Add("You don't need my help for that. You're managing to insult #target# just fine on your own. Whatever that is...");
-            listInsults.Add("#target# sounds like a boy!");
-            listInsults.Add("#target# doesn't press T...");
-            listInsults.Add("#target#'s mother is a fine lady!");
-            listInsults.Add("Can't be bothered, you do it...");
-            listInsults.Add("How much will you pay me, to do that?");
-            listInsults.Add("Yes AL. Whatever you say AL.");
-            var i = (new Random()).Next(listInsults.Count);
+            var i = (new Random()).Next(lists.Insults.Count);
 
-            return listInsults[i].Replace("#target#", target);
+            return lists.Insults[i].Replace("#target#", target);
         }
 
         [Command("userinfo")]
@@ -76,7 +68,7 @@ namespace GCBot
         public async Task ListRolesAsync()
         {
             string rolesList = "";
-            foreach (var token in tokens.Tokens)
+            foreach (var token in lists.Regiments)
             {
                 if (rolesList != "")
                     rolesList += ", ";
@@ -119,7 +111,7 @@ namespace GCBot
             SocketRole regimentRole = null;
             foreach (var userRole in ((SocketGuildUser)requestingUser).Roles)
             {
-                foreach (var regiment in tokens.Tokens)
+                foreach (var regiment in lists.Regiments)
                 {
                     if (userRole.Name == regiment.LongName)
                         regimentRole = userRole;
@@ -135,7 +127,7 @@ namespace GCBot
             #region Check if the user is already in a regiment
             foreach (var userRole in user.Roles)
             {
-                foreach (var regiment in tokens.Tokens)
+                foreach (var regiment in lists.Regiments)
                 {
                     if (userRole.Name == regiment.LongName)
                     {
@@ -158,11 +150,11 @@ namespace GCBot
             [Summary("The role name to list")]
             string roleName = null)
         {
-            var requestedToken = tokens.Tokens.FirstOrDefault(t => t.ShortName == roleName || t.LongName == roleName);
+            var requestedToken = lists.Regiments.FirstOrDefault(t => t.ShortName == roleName || t.LongName == roleName);
             if (requestedToken == null)
             {
                 string rolesList = "";
-                foreach (var token in tokens.Tokens)
+                foreach (var token in lists.Regiments)
                 {
                     if (rolesList != "")
                         rolesList += ", ";
@@ -216,62 +208,6 @@ namespace GCBot
             await ReplyAsync($"{role.Name} has the following users: {usersList}");
         }
 
-        /*
-        [Command("addrole")]
-        [Summary("Gives you a role so you can show your affection towards your favorite GC Token.")]
-        [Alias("support", "token")]
-        public async Task GetRoleAsync(
-            [Summary("Your favorite GC token")]
-            string input)
-        {
-            var user = Context.User;
-
-            var requestedToken = tokens.Tokens.FirstOrDefault(t => t.ShortName == input || t.LongName == input);
-            if (requestedToken == null)
-            {
-                string rolesList = "";
-                foreach (var token in tokens.Tokens)
-                {
-                    if (rolesList != "")
-                        rolesList += ", ";
-                    rolesList += token.ShortName;
-                }
-                await ReplyAsync($"{input.Replace("@", "")} is not a Role you can select through this command.\r\nThe following roles are available: {rolesList}.");
-
-                return;
-            }
-
-            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == requestedToken.LongName);
-
-            if (role == null)
-            {
-                await ReplyAsync($"{input.Replace("@", "")} seems to be improperly created, you should complain to the Game Master.");
-                return;
-            }
-
-            string result = "";
-            foreach (var currentRole in (user as SocketGuildUser).Roles)
-            {
-                if (currentRole.Name == requestedToken.LongName)
-                {
-                    result += $"{user.Username} already supports {requestedToken.LongName}.";
-                    await ReplyAsync(result);
-                    return;
-                }
-                if (tokens.Tokens.FirstOrDefault(t => t.LongName == currentRole.Name) != null)
-                {
-                    await (user as SocketGuildUser).RemoveRoleAsync(currentRole);
-                    result += $"{user.Username} no longer supports {currentRole.Name}.\r\n";
-                }
-            }
-
-            await (user as SocketGuildUser).AddRoleAsync(role);
-
-            result += $"{user.Username} now supports {requestedToken.LongName}.";
-            await ReplyAsync(result);
-        }
-        */
-        
         [Command("remove")]
         [Summary("Removes your favorite GC Token role.")]
         [Alias("leave")]
@@ -281,7 +217,7 @@ namespace GCBot
             string result = "";
             foreach (var currentRole in (user as SocketGuildUser).Roles)
             {
-                if (tokens.Tokens.FirstOrDefault(t => t.LongName == currentRole.Name) != null)
+                if (lists.Regiments.FirstOrDefault(t => t.LongName == currentRole.Name) != null)
                 {
                     await (user as SocketGuildUser).RemoveRoleAsync(currentRole);
                     if (result != "")
@@ -338,7 +274,7 @@ namespace GCBot
             SocketRole regimentRole = null;
             foreach (var userRole in ((SocketGuildUser)requestingUser).Roles)
             {
-                foreach (var regiment in tokens.Tokens)
+                foreach (var regiment in lists.Regiments)
                 {
                     if (userRole.Name == regiment.LongName)
                         regimentRole = userRole;
