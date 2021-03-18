@@ -274,6 +274,7 @@ namespace GCBot
         
         [Command("remove")]
         [Summary("Removes your favorite GC Token role.")]
+        [Alias("leave")]
         public async Task RemoveRoleAsync()
         {
             var user = Context.User;
@@ -293,6 +294,7 @@ namespace GCBot
 
         [Command("remove")]
         [Summary("Removes your favorite GC Token role.")]
+        [Alias("leave")]
         public async Task RemoveRoleAsync(
             string toDiscard)
         {
