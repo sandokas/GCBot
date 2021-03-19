@@ -44,6 +44,47 @@ namespace GCBot
             return;
         }
 
+        [Command("praise")]
+        [Summary("Praises someone or something.")]
+        public async Task PraisetAsync([Remainder][Summary("What you want to praise")] string input)
+        {
+            if (Context.Channel.Name != botChannel)
+                return;
+
+            if (input.Contains("@"))
+            {
+                await ReplyAsync($"You can't praise that!");
+                return;
+            }
+
+
+            await ReplyAsync(GetPraise(input, Context.User));
+            return;
+        }
+
+        [Command("praise")]
+        [Summary("Praises someone or something.")]
+        public async Task PraiseAsync([Remainder][Summary("What you want to praise")] SocketUser user)
+        {
+            if (Context.Channel.Name != botChannel)
+                return;
+
+            if (user.IsBot)
+            {
+                await ReplyAsync($"I know, we bots are the best, aren't we?");
+                return;
+            }
+
+            await ReplyAsync(GetPraise(user.Mention, Context.User));
+            return;
+        }
+        private string GetPraise(string target, SocketUser user)
+        {
+            var i = (new Random()).Next(lists.Praises.Count);
+
+            return lists.Praises[i].Replace("#target#", target).Replace("#user#", user.Mention);
+        }
+
         [Command("insult")]
         [Summary("Insults someone or something.")]
         public async Task InsultAsync([Remainder][Summary("What you want to insult")] string input)
@@ -177,7 +218,7 @@ namespace GCBot
         [Command("listusers")]
         [Summary("Returns list of users with given role.")]
         public async Task ListUsersByRoleAsync(
-            [Summary("The role name to list")]
+            [Remainder][Summary("The role name to list")]
             string roleName = null)
         {
             if (Context.Channel.Name != botChannel)

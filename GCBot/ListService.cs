@@ -16,8 +16,10 @@ namespace GCBot
                 Regiments.Add(new Regiment() { ShortName = dic.Key, LongName = dic.Value });
             }
             this.Insults = config.GetSection("Insults").Get<List<string>>();
+            this.Praises = config.GetSection("Praises").Get<List<string>>();
         }
         public IList<Regiment> Regiments { get; } = new List<Regiment>();
         public IList<string> Insults { get; } = new List<string>();
+        public IList<string> Praises { get; } = new List<string>();
     }
 }
