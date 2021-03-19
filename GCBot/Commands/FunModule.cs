@@ -88,7 +88,7 @@ namespace GCBot
 
             if (user == Context.User)
             {
-                await ReplyAsync($"Looking for some menaningless boost to self esteem are we?");
+                await ReplyAsync($"Looking for some meaningless boost to self esteem are we?");
                 return;
             }
 
