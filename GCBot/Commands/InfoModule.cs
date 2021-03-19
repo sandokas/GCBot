@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Discord;
+using Discord.Commands;
+using Discord.Rest;
+using Discord.WebSocket;
+using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace GCBot
 {
-    using Discord;
-    using Discord.Commands;
-    using Discord.Rest;
-    using Discord.WebSocket;
-    using Microsoft.Extensions.DependencyInjection;
-    using System.Threading.Tasks;
 
     // Keep in mind your module **must** be public and inherit ModuleBase.
     // If it isn't, it will not be discovered by AddModulesAsync!
