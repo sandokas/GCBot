@@ -25,14 +25,24 @@ namespace GCBot
 
         [Command("hello")]
         [Summary("Says hi to the bot.")]
-        public async Task InsultAsync()
+        public async Task HelloAsync()
         {
             if (Context.Channel.Name != "bot-commands")
                 return;
-            await ReplyAsync($"Hello, {Context.User.Mention}.");
+            await ReplyAsync($"Oh. Hello, {Context.User.Mention}!");
             return;
         }
 
+        [Command("bye")]
+        [Summary("Say goodbye to the bot.")]
+        [Alias("goodbye")]
+        public async Task ByeAsync()
+        {
+            if (Context.Channel.Name != "bot-commands")
+                return;
+            await ReplyAsync($"Goodbye, {Context.User.Mention}. Have fun!");
+            return;
+        }
 
         [Command("insult")]
         [Summary("Insults someone or something.")]
