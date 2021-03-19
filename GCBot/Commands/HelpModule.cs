@@ -12,6 +12,7 @@ namespace GCBot.Commands
 
     public class HelpModule : ModuleBase<SocketCommandContext>
     {
+        private string botChannel = "bot-commands";
         private static CommandService commandService;
         public HelpModule(IServiceProvider services)
         {
@@ -21,6 +22,9 @@ namespace GCBot.Commands
         [Command("Help")]
         public async Task Help()
         {
+            if (Context.Channel.Name != botChannel)
+                return;
+
             List<CommandInfo> commands = commandService.Commands.ToList();
             EmbedBuilder embedBuilder = new EmbedBuilder();
 

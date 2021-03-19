@@ -27,7 +27,7 @@ namespace GCBot
         [Summary("Says hi to the bot.")]
         public async Task HelloAsync()
         {
-            if (Context.Channel.Name != "bot-commands")
+            if (Context.Channel.Name != botChannel)
                 return;
             await ReplyAsync($"Oh. Hello, {Context.User.Mention}!");
             return;
@@ -38,7 +38,7 @@ namespace GCBot
         [Alias("goodbye")]
         public async Task ByeAsync()
         {
-            if (Context.Channel.Name != "bot-commands")
+            if (Context.Channel.Name != botChannel)
                 return;
             await ReplyAsync($"Goodbye, {Context.User.Mention}. Have fun!");
             return;
