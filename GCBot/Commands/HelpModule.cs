@@ -12,17 +12,18 @@ namespace GCBot.Commands
 
     public class HelpModule : ModuleBase<SocketCommandContext>
     {
-        private string botChannel = "bot-commands";
+        private ListService lists;
         private static CommandService commandService;
         public HelpModule(IServiceProvider services)
         {
             commandService = services.GetRequiredService<CommandService>();
+            lists = services.GetRequiredService<ListService>();
         }
 
         [Command("Help")]
         public async Task Help()
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             List<CommandInfo> commands = commandService.Commands.ToList();

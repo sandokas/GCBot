@@ -17,9 +17,13 @@ namespace GCBot
             }
             this.Insults = config.GetSection("Insults").Get<List<string>>();
             this.Praises = config.GetSection("Praises").Get<List<string>>();
+            this.BotChannel = config.GetSection("BotChannel").Get<string>();
+            this.RegimentalAdminRole = config.GetSection("RegimentalAdminRole").Get<string>();
         }
         public IList<Regiment> Regiments { get; } = new List<Regiment>();
         public IList<string> Insults { get; } = new List<string>();
         public IList<string> Praises { get; } = new List<string>();
+        public string BotChannel { get; } = "";
+        public string RegimentalAdminRole { get; } = "";
     }
 }

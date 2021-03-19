@@ -5,13 +5,13 @@ using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
+using GCBot.Extensions;
 
 namespace GCBot.Commands
 {
     public class RoleModule : ModuleBase<SocketCommandContext>
     {
         private ListService lists;
-        private string botChannel = "bot-commands";
         public RoleModule(IServiceProvider services)
         {
             lists = services.GetRequiredService<ListService>();
@@ -22,7 +22,7 @@ namespace GCBot.Commands
         [Alias("list")]
         public async Task ListRolesAsync()
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             string rolesList = "";
@@ -43,7 +43,7 @@ namespace GCBot.Commands
             [Summary("The role name to list")]
             SocketGuildUser user)
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             var requestingUser = Context.User;
@@ -111,7 +111,7 @@ namespace GCBot.Commands
             [Remainder][Summary("The role name to list")]
             string roleName = null)
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             var requestedToken = lists.Regiments.FirstOrDefault(t => t.ShortName == roleName || t.LongName == roleName);
@@ -177,7 +177,7 @@ namespace GCBot.Commands
         [Alias("remove")]
         public async Task RemoveRoleAsync()
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             var user = Context.User;
@@ -209,12 +209,12 @@ namespace GCBot.Commands
         public async Task RemoveRoleAsync(
             SocketGuildUser user)
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             var requestingUser = Context.User;
 
-            if (((SocketGuildUser)Context.User) == user)
+            if (((SocketGuildUser)requestingUser) == user)
             {
                 await RemoveRoleAsync();
                 return;
@@ -272,5 +272,74 @@ namespace GCBot.Commands
 
         }
 
+        [Command("tag")]
+        [Summary("Fix tags for someone in your Regiment.")]
+        public async Task ChangeNickname(
+            [Summary("User whose tags you want to change")] SocketGuildUser user, 
+            [Remainder][Summary("New tags for that user")] string tag)
+        {
+            if (Context.Channel.Name != lists.BotChannel)
+                return;
+
+            var tagLimitation = 32;
+            if (tag.Length>32)
+            {
+                tag = tag.Substring(0, tagLimitation);
+                await ReplyAsync($"Tag is longer than {tagLimitation} characters, and will be truncated to:{tag}");
+            }
+
+            if(user == ((SocketGuildUser)Context.User))
+            {
+                await ReplyAsync($"You're too fancy to use 'Change Nickname' are you?");
+                return;
+            }
+
+            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == lists.RegimentalAdminRole);
+            if (role == null)
+            {
+                await ReplyAsync($"This command is temporarily disabled until Agentsvr knows what he's doing.");
+                return;
+            }
+
+            var requestingUser = Context.User;
+            if (!((SocketGuildUser)requestingUser).HasRole(role))
+            {
+                await ReplyAsync($"Only {lists.RegimentalAdminRole}s can use this command.");
+                return;
+            }
+
+            SocketRole regimentRole = null;
+            foreach (var userRole in ((SocketGuildUser)requestingUser).Roles)
+            {
+                foreach (var regiment in lists.Regiments)
+                {
+                    if (userRole.Name == regiment.LongName)
+                        regimentRole = userRole;
+                }
+            }
+
+            if (regimentRole == null)
+            {
+                await ReplyAsync($"How can you be in a {lists.RegimentalAdminRole} and not be in a recognized Regiment?");
+                return;
+            }
+
+            var userBelongsToRegiment = false;
+            foreach (var userRole in user.Roles)
+            {
+                if (userRole == regimentRole)
+                {
+                    userBelongsToRegiment = true;
+                }
+            }
+            if (!userBelongsToRegiment)
+            {
+                await ReplyAsync($"You can't change a tag for someone that is not in your Regiment.");
+                return;
+            }
+
+            await user.ModifyAsync(x => { x.Nickname = tag; });
+            await ReplyAsync($"{user.Mention} tags changed to:{tag}");
+        }
     }
 }

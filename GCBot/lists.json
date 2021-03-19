@@ -32,6 +32,8 @@
     "15thAL": "15th Alabama",
     "5thNH": "5th New Hampshire"
   },
+  "RegimentalAdminRole": "Representative Officer",
+  "BotChannel": "bot-commands",
   "Insults": [
     "#target#'s favourite thing is bad!",
     "#target#? Who are they again?",
@@ -72,7 +74,7 @@
     "#target# will never look as cute as Agentsvr. <3",
     "#target#'s milkshakes bring all boys to the yard.",
     "#target#'s mother is a super nice lady.",
-    "#target#s is as fun in bed as River Crossing as the attacker.",
+    "#target# is as fun as River Crossing as the attacker.",
     "This insult is sponsored by Raid: Shadow Legends!",
     "Error! Error! Error!",
     "Please insert another dollar for your insult",

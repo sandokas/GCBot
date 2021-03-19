@@ -17,7 +17,6 @@ namespace GCBot
     public class FunModule : ModuleBase<SocketCommandContext>
     {
         private ListService lists;
-        private string botChannel = "bot-commands";
         public FunModule(IServiceProvider services)
         {
             lists = services.GetRequiredService<ListService>();
@@ -27,7 +26,7 @@ namespace GCBot
         [Summary("Says hi to the bot.")]
         public async Task HelloAsync()
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
             await ReplyAsync($"Oh. Hello, {Context.User.Mention}!");
             return;
@@ -38,7 +37,7 @@ namespace GCBot
         [Alias("goodbye")]
         public async Task ByeAsync()
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
             await ReplyAsync($"Goodbye, {Context.User.Mention}. Have fun!");
             return;
@@ -48,7 +47,7 @@ namespace GCBot
         [Summary("Praises someone or something.")]
         public async Task PraiseAsync([Remainder][Summary("What you want to praise")] string input)
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             if (input.Contains("@"))
@@ -77,7 +76,7 @@ namespace GCBot
         [Summary("Praises someone or something.")]
         public async Task PraiseAsync([Remainder][Summary("What you want to praise")] SocketUser user)
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             if (user.IsBot)
@@ -106,7 +105,7 @@ namespace GCBot
         [Summary("Insults someone or something.")]
         public async Task InsultAsync([Remainder][Summary("What you want to insult")] string input)
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             if (input.Contains("@"))
@@ -136,7 +135,7 @@ namespace GCBot
         [Summary("Insults someone or something.")]
         public async Task InsultAsync([Remainder][Summary("What you want to insult")] SocketUser user)
         {
-            if (Context.Channel.Name != botChannel)
+            if (Context.Channel.Name != lists.BotChannel)
                 return;
 
             if (user.IsBot)
