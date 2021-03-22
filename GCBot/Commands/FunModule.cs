@@ -32,6 +32,51 @@ namespace GCBot
             return;
         }
 
+        private bool HasChoiceBeenMade(string choice)
+        {
+            if (lists.Chosen.Where(x => x == choice.ToUpperInvariant().Trim()).Any())
+                return true;
+            lists.Chosen.Add(choice.ToUpperInvariant().Trim());
+
+            return false;
+        }
+        [Command("Choose")]
+        [Summary("Choose an option.")]
+        public async Task ChooseAsync([Remainder] string choice)
+        {
+            if (Context.Channel.Name != lists.BotChannel)
+                return;
+
+            if (HasChoiceBeenMade(choice))
+            {
+                await ReplyAsync($"I've already choosen between {choice}. Not picking THAT again.");
+                return;
+            }    
+
+            if (!choice.ToUpperInvariant().Contains(" OR "))
+            {
+                await ReplyAsync($"Options need to be separated by \" OR \"");
+                return;
+            }
+
+            var options = choice.ToUpperInvariant().Split(" OR ");
+
+            for (int i = 1; i < options.Length; i++)
+            {
+                if(options[i].Trim() == options[i-1].Trim())
+                {
+                    await ReplyAsync($"Those are the same, you're trying to trick me!");
+                    return;
+                }
+
+            }
+
+            var chosen = options[(new Random()).Next(options.Count())];
+            var n = (new Random()).Next(lists.Choices.Count);
+            await ReplyAsync(lists.Choices[n].Replace("#choice#", chosen));
+            return;
+        }
+
         [Command("bye")]
         [Summary("Say goodbye to the bot.")]
         [Alias("goodbye")]
@@ -120,7 +165,7 @@ namespace GCBot
                 return;
             }
 
-            if (input.ToLowerInvariant().Trim() == "me")
+            if (input.ToLowerInvariant().Trim() == "me" || input.ToLowerInvariant().Trim() == "myself")
             {
                 await ReplyAsync($"Oh. Come on. You're not that bad! Here, have a cookie.");
                 return;
