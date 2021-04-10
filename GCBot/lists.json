@@ -1,37 +1,151 @@
 {
-  "RegimentRoles": {
-    "Sumners": "Sumner's II Corps",
-    "IL": "Irish Legion",
-    "HP": "Hill People",
-    "6thAL": "6th Alabama",
-    "PA": "Pennsylvania Army",
-    "II": "II Corps",
-    "VI": "VI Corps",
-    "15thSC": "15th South Carolina",
-    "LB": "Lightning Brigade",
-    "PB": "Pickett's Brigade",
-    "4thNJ": "4th New Jersey",
-    "NSK": "Nederlandse Strijdkrachten",
-    "65thIL": "65th Illinois",
-    "7thAR": "7th Arkansas",
-    "PD": "Pleasonton's Division",
-    "14thTN": "14th Tennessee",
-    "IX": "IX Corps",
-    "12thSC": "12th South Carolina",
-    "7thMI": "7th Michigan",
-    "7thTN": "7th Tennessee",
-    "3rdMN": "3rd Minnesota",
-    "33rdVA": "33rd Virginia",
-    "8thNY": "8th New York",
-    "2ndFL": "2nd Florida",
-    "6thWI": "6th Wisconsin",
-    "14thLA": "14th Louisiana",
-    "8thCV": "8th Connecticut Volunteers",
-    "2ndMS": "2nd Mississipi",
-    "14thBK": "14th Brooklyn",
-    "15thAL": "15th Alabama",
-    "5thNH": "5th New Hampshire"
-  },
+  "RegimentRoles": [
+    {
+      "ShortName": "Sumners",
+      "LongName": "Sumner's II Corps",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "IL",
+      "LongName": "Irish Legion",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "HP",
+      "LongName": "Hill People",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "6thAL",
+      "LongName": "6th Alabama",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "PA",
+      "LongName": "Pennsylvania Army",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "II",
+      "LongName": "II Corps",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "VI",
+      "LongName": "VI Corps",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "15thSC",
+      "LongName": "15th South Carolina",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "LB",
+      "LongName": "Lightning Brigade",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "PB",
+      "LongName": "Pickett's Brigade",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "4thNJ",
+      "LongName": "4th New Jersey",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "NSK",
+      "LongName": "Nederlandse Strijdkrachten",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "65thIL",
+      "LongName": "65th Illinois",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "7thAR",
+      "LongName": "7th Arkansas",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "PD",
+      "LongName": "Pleasonton's Division",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "14thTN",
+      "LongName": "14th Tennessee",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "IX",
+      "LongName": "IX Corps",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "12thSC",
+      "LongName": "12th South Carolina",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "I Corps",
+      "LongName": "I Corps",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "7thTN",
+      "LongName": "7th Tennessee",
+      "Faction": "Unaligned"
+    },
+    {
+      "ShortName": "4thRI",
+      "LongName": "4th Rhode Island",
+      "Faction": "Unaligned"
+    },
+    {
+      "ShortName": "33rdVA",
+      "LongName": "33rd Virginia",
+      "Faction": "Unaligned"
+    },
+    {
+      "ShortName": "6thWI",
+      "LongName": "6th Wisconsin",
+      "Faction": "Unaligned"
+    },
+    {
+      "ShortName": "5thFL",
+      "LongName": "5th Florida",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "14thLA",
+      "LongName": "14th Louisiana",
+      "Faction": "Unaligned"
+    },
+    {
+      "ShortName": "8thCT",
+      "LongName": "8th Connecticut Volunteers",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "2ndMS",
+      "LongName": "2nd Mississipi",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "15thAL",
+      "LongName": "15th Alabama",
+      "Faction": "Unaligned"
+    },
+    {
+      "ShortName": "5thNH",
+      "LongName": "5th New Hampshire",
+      "Faction": "CSA"
+    }
+  ],
   "RegimentalAdminRole": "Representative Officer",
   "BotChannel": "bot-commands",
   "Choices": [
@@ -102,7 +216,6 @@
     "#target# hates sea shanties. Clearly, he also hates the bois.",
     "#target# think's Griffith did nothing wrong. ",
     "#target# drinks milk.",
-    "Make sure to stay hydrated while insulting people!",
     "Rumour has it that if you slip #target# a 50 he'll throw his next match.",
     "Mom! Get the camera! #target#'s gonna do something stupid again!",
     "You don't need my help for that. You're managing to insult #target# just fine on your own.",
@@ -123,7 +236,6 @@
     "#target# has been throwing unbased accusations left and right.",
     "Really? You know #target# has formally protested against you?",
     "#target# has complained to the Admins. Your comment will now be removed.",
-    "I want to have #target#'s children. Little bots walking around all over the Discord...",
     "I think that's great. Now finish your rice.",
     "#target#'s loose! Kill it before it breeds!",
     "But #target# did nothing wrong!",
@@ -189,7 +301,8 @@
     "#target# moved from spawn before 42:00.",
     "#target# has been removed from their regiment. Good riddance I say.",
     "#target# is only as strong as the weakest CSA regiment.",
-    "#target# is only as strong as the weakest Union regiment."
+    "#target# is only as strong as the weakest Union regiment.",
+    "#target# doesn't pay his taxes."
   ],
   "Praises": [
     "#target# is perfect.",
@@ -275,6 +388,7 @@
     "#target# is never out of line.",
     "#target# is dependable like clockwork.",
     "#target# never shies from a battle.",
-    "#target# is always the first in a charge."
+    "#target# is always the first in a charge.",
+    "I want to have #target#'s children. Little half-bred bots walking around all over the Discord..."
   ]
 }

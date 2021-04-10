@@ -10,11 +10,7 @@ namespace GCBot
     {
         public ListService(IConfiguration config)
         {
-            var dics = config.GetSection("RegimentRoles").Get<Dictionary<string, string>>();
-            foreach (var dic in dics)
-            {
-                Regiments.Add(new Regiment() { ShortName = dic.Key, LongName = dic.Value });
-            }
+            this.Regiments = config.GetSection("RegimentRoles").Get<List<Regiment>>();
             this.Insults = config.GetSection("Insults").Get<List<string>>();
             this.Praises = config.GetSection("Praises").Get<List<string>>();
             this.BotChannel = config.GetSection("BotChannel").Get<string>();

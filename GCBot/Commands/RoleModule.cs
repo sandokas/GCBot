@@ -70,12 +70,16 @@ namespace GCBot.Commands
 
             #region Load New Regiment
             SocketRole regimentRole = null;
+            Regiment regiment = null;
             foreach (var userRole in ((SocketGuildUser)requestingUser).Roles)
             {
-                foreach (var regiment in lists.Regiments)
+                foreach (var r in lists.Regiments)
                 {
-                    if (userRole.Name == regiment.LongName)
+                    if (userRole.Name == r.LongName)
+                    {
                         regimentRole = userRole;
+                        regiment = r;
+                    }
                 }
             }
             if (regimentRole == null)
@@ -88,9 +92,9 @@ namespace GCBot.Commands
             #region Check if the user is already in a regiment
             foreach (var userRole in user.Roles)
             {
-                foreach (var regiment in lists.Regiments)
+                foreach (var r in lists.Regiments)
                 {
-                    if (userRole.Name == regiment.LongName)
+                    if (userRole.Name == r.LongName)
                     {
                         await ReplyAsync($"The user you're trying to add to your regiment is already in another regiment. Talk with the representative officer of {regiment.LongName}");
                         return;
@@ -99,8 +103,17 @@ namespace GCBot.Commands
             }
             #endregion
 
+            var userMention = string.IsNullOrWhiteSpace(user.Nickname) ? user.Mention : user.Nickname;
+
+            if (regiment.Faction != Faction.Unaligned)
+            {
+                var factionRole = Context.Guild.Roles.FirstOrDefault(r => r.Name == regiment.Faction.ToString());
+                await user.AddRoleAsync(factionRole);
+                await ReplyAsync($"Added {userMention} to {factionRole.Name}");
+            }
+
             await user.AddRoleAsync(regimentRole);
-            await ReplyAsync($"Added {user.Nickname} to {regimentRole.Name}");
+            await ReplyAsync($"Added {userMention} to {regimentRole.Name}");
             return;
 
         }
@@ -242,12 +255,16 @@ namespace GCBot.Commands
 
             #region Load New Regiment
             SocketRole regimentRole = null;
+            Regiment regiment = null;
             foreach (var userRole in ((SocketGuildUser)requestingUser).Roles)
             {
-                foreach (var regiment in lists.Regiments)
+                foreach (var r in lists.Regiments)
                 {
-                    if (userRole.Name == regiment.LongName)
+                    if (userRole.Name == r.LongName)
+                    {
                         regimentRole = userRole;
+                        regiment = r;
+                    }
                 }
             }
             if (regimentRole == null)
@@ -257,14 +274,24 @@ namespace GCBot.Commands
             }
             #endregion
 
+            bool wasInRegiment = false;
             foreach (var userRole in user.Roles)
             {
                 if (userRole == regimentRole)
                 {
                     await (user as SocketGuildUser).RemoveRoleAsync(regimentRole);
-                    await ReplyAsync($"Remove the regiment {regimentRole.Name} from {user.Nickname}.");
-                    return;
+                    await ReplyAsync($"Remove the regiment {regimentRole.Name} from {user.Mention}.");
+                    wasInRegiment = true;
                 }
+                else if (userRole.Name == regiment.Faction.ToString())
+                {
+                    await (user as SocketGuildUser).RemoveRoleAsync(userRole);
+                    await ReplyAsync($"Remove the faction {regiment.Faction.ToString()} from {user.Mention}.");
+                }
+            }
+            if (wasInRegiment)
+            {
+                return;
             }
 
             await ReplyAsync($"{user.Nickname} was not in your regiment {regimentRole.Name} anyway... you're welcome, I guess.");
