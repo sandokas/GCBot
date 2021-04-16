@@ -1,18 +1,8 @@
 {
   "RegimentRoles": [
     {
-      "ShortName": "Sumners",
-      "LongName": "Sumner's II Corps",
-      "Faction": "USA"
-    },
-    {
-      "ShortName": "IL",
-      "LongName": "Irish Legion",
-      "Faction": "CSA"
-    },
-    {
-      "ShortName": "HP",
-      "LongName": "Hill People",
+      "ShortName": "GAR",
+      "LongName": "Grand Army of the Republic",
       "Faction": "USA"
     },
     {
@@ -21,23 +11,13 @@
       "Faction": "CSA"
     },
     {
-      "ShortName": "PA",
-      "LongName": "Pennsylvania Army",
+      "ShortName": "Sumners",
+      "LongName": "Sumner's II Corps",
       "Faction": "USA"
     },
     {
-      "ShortName": "II",
-      "LongName": "II Corps",
-      "Faction": "CSA"
-    },
-    {
-      "ShortName": "VI",
-      "LongName": "VI Corps",
-      "Faction": "USA"
-    },
-    {
-      "ShortName": "15thSC",
-      "LongName": "15th South Carolina",
+      "ShortName": "24thGA",
+      "LongName": "24th Georgia",
       "Faction": "CSA"
     },
     {
@@ -46,43 +26,33 @@
       "Faction": "USA"
     },
     {
+      "ShortName": "II",
+      "LongName": "II Corps",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "PA",
+      "LongName": "Pennsylvania Army",
+      "Faction": "USA"
+    },
+    {
       "ShortName": "PB",
       "LongName": "Pickett's Brigade",
       "Faction": "CSA"
     },
     {
-      "ShortName": "4thNJ",
-      "LongName": "4th New Jersey",
+      "ShortName": "TNA",
+      "LongName": "The Northern Aggression",
       "Faction": "USA"
     },
     {
-      "ShortName": "NSK",
-      "LongName": "Nederlandse Strijdkrachten",
+      "ShortName": "IL",
+      "LongName": "Irish Legion",
       "Faction": "CSA"
     },
     {
       "ShortName": "65thIL",
       "LongName": "65th Illinois",
-      "Faction": "USA"
-    },
-    {
-      "ShortName": "7thAR",
-      "LongName": "7th Arkansas",
-      "Faction": "CSA"
-    },
-    {
-      "ShortName": "PD",
-      "LongName": "Pleasonton's Division",
-      "Faction": "USA"
-    },
-    {
-      "ShortName": "14thTN",
-      "LongName": "14th Tennessee",
-      "Faction": "CSA"
-    },
-    {
-      "ShortName": "IX",
-      "LongName": "IX Corps",
       "Faction": "USA"
     },
     {
@@ -96,18 +66,78 @@
       "Faction": "USA"
     },
     {
-      "ShortName": "7thTN",
-      "LongName": "7th Tennessee",
+      "ShortName": "14thTN",
+      "LongName": "14th Tennessee",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "4thNJ",
+      "LongName": "4th New Jersey",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "7thAR",
+      "LongName": "7th Arkansas",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "PD",
+      "LongName": "Pleasonton's Division",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "13thGA",
+      "LongName": "13th Georgia",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "15thMA",
+      "LongName": "15th Massachusetts",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "NSK",
+      "LongName": "Nederlandse Strijdkrachten",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "IX",
+      "LongName": "IX Corps",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "15thSC",
+      "LongName": "15th South Carolina",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "5thNH",
+      "LongName": "5th New Hampshire",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "2ndUSB",
+      "LongName": "2nd US Battery",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "CB",
+      "LongName": "Cooper's Brigade",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "5thFL",
+      "LongName": "5th Florida",
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "4thRI",
-      "LongName": "4th Rhode Island",
+      "ShortName": "8thCT",
+      "LongName": "8th Connecticut",
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "33rdVA",
-      "LongName": "33rd Virginia",
+      "ShortName": "2ndMS",
+      "LongName": "2nd Mississipi",
       "Faction": "Unaligned"
     },
     {
@@ -116,9 +146,9 @@
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "5thFL",
-      "LongName": "5th Florida",
-      "Faction": "CSA"
+      "ShortName": "33rdVA",
+      "LongName": "33rd Virginia",
+      "Faction": "Unaligned"
     },
     {
       "ShortName": "14thLA",
@@ -126,24 +156,9 @@
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "8thCT",
-      "LongName": "8th Connecticut Volunteers",
-      "Faction": "USA"
-    },
-    {
-      "ShortName": "2ndMS",
-      "LongName": "2nd Mississipi",
-      "Faction": "CSA"
-    },
-    {
       "ShortName": "15thAL",
       "LongName": "15th Alabama",
       "Faction": "Unaligned"
-    },
-    {
-      "ShortName": "5thNH",
-      "LongName": "5th New Hampshire",
-      "Faction": "CSA"
     }
   ],
   "RegimentalAdminRole": "Representative Officer",
