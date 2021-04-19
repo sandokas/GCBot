@@ -163,6 +163,9 @@
   ],
   "RegimentalAdminRole": "Representative Officer",
   "BotChannel": "bot-commands",
+  "AutoRoles": [
+    "Orator"
+  ],
   "Choices": [
     "In this case I think the obvious choice is: #choice#.",
     "The stars are aligned so that #choice# is better.",

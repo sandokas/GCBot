@@ -17,6 +17,40 @@ namespace GCBot.Commands
             lists = services.GetRequiredService<ListService>();
         }
 
+        [Command("giveme")]
+        [Summary("Adds a specific role")]
+        [Alias("gimme")]
+        public async Task GiveRoleToSelf([Remainder][Summary("The role name from a list")]
+            string roleName = null)
+        {
+            if (!lists.AutoRoles.Contains(roleName))
+            {
+                await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ", lists.AutoRoles.ToArray())}.");
+                return;
+            }
+            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == roleName);
+            var user = (SocketGuildUser)Context.User;
+            await user.AddRoleAsync(role);
+            await ReplyAsync($"Added {role.Name} to {user.Username}");
+        }
+
+        [Command("takefromme")]
+        [Summary("Removes a specific role")]
+        [Alias("take")]
+        public async Task TakeRoleFromSelf([Remainder][Summary("The role name from a list")]
+            string roleName = null)
+        {
+            if (!lists.AutoRoles.Contains(roleName))
+            {
+                await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ", lists.AutoRoles.ToArray())}.");
+                return;
+            }
+            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == roleName);
+            var user = (SocketGuildUser)Context.User;
+            await user.RemoveRoleAsync(role);
+            await ReplyAsync($"Removed {roleName} from {user.Username}");
+        }
+
         [Command("listregiments")]
         [Summary("Returns list of available regiments.")]
         [Alias("list")]
@@ -49,7 +83,7 @@ namespace GCBot.Commands
             var requestingUser = Context.User;
 
             #region Representative Officer permissions
-            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == "Representative Officer");
+            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == lists.RegimentalAdminRole);
             if (role == null)
             {
                 await ReplyAsync($"This command is temporarily disabled until Agentsvr knows what he's doing.");
