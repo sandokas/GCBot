@@ -25,7 +25,7 @@ namespace GCBot.Commands
         {
             if (!lists.AutoRoles.Contains(roleName))
             {
-                await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ", lists.AutoRoles.ToArray())}.");
+                await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ",lists.AutoRoles)}.");
                 return;
             }
             var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == roleName);
@@ -42,7 +42,7 @@ namespace GCBot.Commands
         {
             if (!lists.AutoRoles.Contains(roleName))
             {
-                await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ", lists.AutoRoles.ToArray())}.");
+                await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ", lists.AutoRoles)}.");
                 return;
             }
             var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == roleName);
