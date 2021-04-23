@@ -116,24 +116,14 @@
       "Faction": "USA"
     },
     {
+      "ShortName": "5thFL",
+      "LongName": "5th Florida",
+      "Faction": "CSA"
+    },
+    {
       "ShortName": "2ndUSB",
       "LongName": "2nd US Battery",
       "Faction": "USA"
-    },
-    {
-      "ShortName": "CB",
-      "LongName": "Cooper's Brigade",
-      "Faction": "USA"
-    },
-    {
-      "ShortName": "5thFL",
-      "LongName": "5th Florida",
-      "Faction": "Unaligned"
-    },
-    {
-      "ShortName": "8thCT",
-      "LongName": "8th Connecticut",
-      "Faction": "Unaligned"
     },
     {
       "ShortName": "2ndMS",
@@ -141,8 +131,8 @@
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "6thWI",
-      "LongName": "6th Wisconsin",
+      "ShortName": "CB",
+      "LongName": "Cooper's Brigade",
       "Faction": "Unaligned"
     },
     {
@@ -151,8 +141,18 @@
       "Faction": "Unaligned"
     },
     {
+      "ShortName": "8thCT",
+      "LongName": "8th Connecticut",
+      "Faction": "Unaligned"
+    },
+    {
       "ShortName": "14thLA",
       "LongName": "14th Louisiana",
+      "Faction": "Unaligned"
+    },
+    {
+      "ShortName": "6thWI",
+      "LongName": "6th Wisconsin",
       "Faction": "Unaligned"
     },
     {
