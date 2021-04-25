@@ -17,12 +17,23 @@ namespace GCBot.Commands
             lists = services.GetRequiredService<ListService>();
         }
 
+        [Command("orator")]
+        [Summary("Calls !gimme Orator")]
+        [Alias("meme","banter")]
+        public async Task GiveOratorToSelf()
+        {
+            await GiveRoleToSelf("Orator");
+        }
+
         [Command("giveme")]
         [Summary("Adds a specific role")]
         [Alias("gimme")]
         public async Task GiveRoleToSelf([Remainder][Summary("The role name from a list")]
             string roleName = null)
         {
+            if (Context.Channel.Name != lists.BotChannel)
+                return;
+
             if (!lists.AutoRoles.Contains(roleName))
             {
                 await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ",lists.AutoRoles)}.");
@@ -40,6 +51,9 @@ namespace GCBot.Commands
         public async Task TakeRoleFromSelf([Remainder][Summary("The role name from a list")]
             string roleName = null)
         {
+            if (Context.Channel.Name != lists.BotChannel)
+                return;
+
             if (!lists.AutoRoles.Contains(roleName))
             {
                 await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ", lists.AutoRoles)}.");
@@ -71,10 +85,81 @@ namespace GCBot.Commands
             return;
         }
 
+        [Command("addstrategy")]
+        [Summary("Add someone to strategy channel.")]
+        [Alias("strategy", "addstrat")]
+        public async Task AddToStrategyAsync(
+            [Summary("The user to add to strategy channel")]
+            SocketGuildUser user
+            )
+        {
+            if (Context.Channel.Name != lists.BotChannel)
+                return;
+            var requestingUser = Context.User;
+
+            // User requesting has role?
+            SocketRole foundStrategyRole = null;
+            foreach(var strategyRole in lists.StrategyRoles)
+            {
+                var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == strategyRole);
+                foreach (var userRole in ((SocketGuildUser)requestingUser).Roles)
+                {
+                    if (userRole.Id == role.Id)
+                        foundStrategyRole = role;
+                }
+            }
+
+            if (foundStrategyRole== null)
+            {
+                await ReplyAsync($"You need to have a strategy role to be able to add someone to a strategy role.");
+                return;
+            }
+
+            await user.AddRoleAsync(foundStrategyRole);
+            await ReplyAsync($"Added {user.Mention} to {foundStrategyRole.Name}");
+            return;
+        }
+
+        [Command("remstrategy")]
+        [Summary("Add someone to strategy channel.")]
+        [Alias("removestrategy","remstrat")]
+        public async Task RemoveFromStrategyAsync(
+        [Summary("The user to remove from strategy channel")]
+            SocketGuildUser user
+            )
+        {
+            if (Context.Channel.Name != lists.BotChannel)
+                return;
+            var requestingUser = Context.User;
+
+            // User requesting has role?
+            SocketRole foundStrategyRole = null;
+            foreach (var strategyRole in lists.StrategyRoles)
+            {
+                var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == strategyRole);
+                foreach (var userRole in ((SocketGuildUser)requestingUser).Roles)
+                {
+                    if (userRole.Id == role.Id)
+                        foundStrategyRole = role;
+                }
+            }
+
+            if (foundStrategyRole == null)
+            {
+                await ReplyAsync($"You need to have a strategy role to be able to remove someone from a strategy role.");
+                return;
+            }
+
+            await user.RemoveRoleAsync(foundStrategyRole);
+            await ReplyAsync($"Removed {user.Mention} from {foundStrategyRole.Name}");
+            return;
+        }
+
+
         [Command("add")]
         [Summary("Add someone to your regiment.")]
         public async Task AddToRegimentAsync(
-            [Summary("The role name to list")]
+            [Summary("The user to add to your regiment")]
             SocketGuildUser user)
         {
             if (Context.Channel.Name != lists.BotChannel)
@@ -399,8 +484,9 @@ namespace GCBot.Commands
                 return;
             }
 
+            var oldName = user.Nickname;
             await user.ModifyAsync(x => { x.Nickname = tag; });
-            await ReplyAsync($"{user.Mention} tags changed to:{tag}");
+            await ReplyAsync($"{oldName} tags changed to:{tag}");
         }
     }
 }

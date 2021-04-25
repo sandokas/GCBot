@@ -127,7 +127,17 @@
     },
     {
       "ShortName": "2ndMS",
-      "LongName": "2nd Mississipi",
+      "LongName": "2nd Mississippi",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "3rdPACav",
+      "LongName": "3rd Pennsylvania Cavalry",
+      "Faction": "USA"
+    },
+    {
+      "ShortName": "33rdVA",
+      "LongName": "33rd Virginia",
       "Faction": "Unaligned"
     },
     {
@@ -136,8 +146,8 @@
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "33rdVA",
-      "LongName": "33rd Virginia",
+      "ShortName": "14thLA",
+      "LongName": "14th Louisiana",
       "Faction": "Unaligned"
     },
     {
@@ -146,23 +156,22 @@
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "14thLA",
-      "LongName": "14th Louisiana",
+      "ShortName": "15thAL",
+      "LongName": "15th Alabama",
       "Faction": "Unaligned"
     },
     {
       "ShortName": "6thWI",
       "LongName": "6th Wisconsin",
       "Faction": "Unaligned"
-    },
-    {
-      "ShortName": "15thAL",
-      "LongName": "15th Alabama",
-      "Faction": "Unaligned"
     }
   ],
   "RegimentalAdminRole": "Representative Officer",
   "BotChannel": "bot-commands",
+  "StrategyRoles": [
+    "CSA Strategy",
+    "USA Strategy"
+  ],
   "AutoRoles": [
     "Orator"
   ],
