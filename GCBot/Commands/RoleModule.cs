@@ -121,7 +121,7 @@ namespace GCBot.Commands
         }
 
         [Command("remstrategy")]
-        [Summary("Add someone to strategy channel.")]
+        [Summary("Remove someone from strategy channel.")]
         [Alias("removestrategy","remstrat")]
         public async Task RemoveFromStrategyAsync(
         [Summary("The user to remove from strategy channel")]

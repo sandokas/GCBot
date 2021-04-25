@@ -17,7 +17,7 @@ namespace GCBot
             this.RegimentalAdminRole = config.GetSection("RegimentalAdminRole").Get<string>();
             this.Choices = config.GetSection("Choices").Get<List<string>>();
             this.AutoRoles = config.GetSection("AutoRoles").Get<List<string>>();
-            this.AutoRoles = config.GetSection("AutoRoles").Get<List<string>>();
+            this.StrategyRoles = config.GetSection("StrategyRoles").Get<List<string>>();
 
         }
         public IList<Regiment> Regiments { get; } = new List<Regiment>();
