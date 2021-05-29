@@ -323,6 +323,13 @@ namespace GCBot.Commands
                         result += "\r\n";
                     result += $"{user.Username} no longer belongs to {currentRole.Name}.";
                 }
+                if (currentRole.Name=="USA" || currentRole.Name=="CSA")
+                {
+                    await (user as SocketGuildUser).RemoveRoleAsync(currentRole);
+                    if (result != "")
+                        result += "\r\n";
+                    result += $"{user.Username} no longer belongs to {currentRole.Name}.";
+                }
             }
             await ReplyAsync(result);
         }
@@ -353,7 +360,7 @@ namespace GCBot.Commands
             }
 
             #region Representative Officer permissions
-            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == "Representative Officer");
+            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == lists.RegimentalAdminRole);
             if (role == null)
             {
                 await ReplyAsync($"This command is temporarily disabled until Agentsvr knows what he's doing.");
