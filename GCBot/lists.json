@@ -51,13 +51,13 @@
       "Faction": "CSA"
     },
     {
-      "ShortName": "65thIL",
-      "LongName": "65th Illinois",
+      "ShortName": "VI",
+      "LongName": "VI Corps",
       "Faction": "USA"
     },
     {
-      "ShortName": "12thSC",
-      "LongName": "12th South Carolina",
+      "ShortName": "CIA",
+      "LongName": "Confederacy of International Americans",
       "Faction": "CSA"
     },
     {
@@ -111,39 +111,34 @@
       "Faction": "CSA"
     },
     {
-      "ShortName": "5thNH",
-      "LongName": "5th New Hampshire",
-      "Faction": "USA"
-    },
-    {
       "ShortName": "5thFL",
       "LongName": "5th Florida",
       "Faction": "CSA"
     },
     {
-      "ShortName": "2ndUSB",
-      "LongName": "2nd US Battery",
-      "Faction": "USA"
+      "ShortName": "BB",
+      "LongName": "Benning's Brigade",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "9thLA",
+      "LongName": "9th Louisiana",
+      "Faction": "CSA"
+    },
+    {
+      "ShortName": "5thNH",
+      "LongName": "5th New Hampshire",
+      "Faction": "Unaligned"
     },
     {
       "ShortName": "2ndMS",
       "LongName": "2nd Mississippi",
-      "Faction": "CSA"
+      "Faction": "Unaligned"
     },
     {
       "ShortName": "3rdPACav",
       "LongName": "3rd Pennsylvania Cavalry",
-      "Faction": "USA"
-    },
-    {
-      "ShortName": "22ndVA",
-      "LongName": "22nd Virginia",
-      "Faction": "CSA"
-    },
-    {
-      "ShortName": "CB",
-      "LongName": "Cooper's Brigade",
-      "Faction": "USA"
+      "Faction": "Unaligned"
     },
     {
       "ShortName": "33rdVA",
@@ -151,8 +146,8 @@
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "8thCT",
-      "LongName": "8th Connecticut",
+      "ShortName": "CB",
+      "LongName": "Cooper's Brigade",
       "Faction": "Unaligned"
     },
     {
@@ -166,8 +161,8 @@
       "Faction": "Unaligned"
     },
     {
-      "ShortName": "15thAL",
-      "LongName": "15th Alabama",
+      "ShortName": "65thIL",
+      "LongName": "65th Illinois",
       "Faction": "Unaligned"
     }
   ],
@@ -307,7 +302,7 @@
     "If #target# countinues like this, will have to be buried in a Y-shaped cofin.",
     "The only chance for #target# to get inside a girl is if he becomes an organ donor.",
     "If ignorance ever goes to $40 a barrel, I want drilling rights on #target#'s head.",
-    "#target# has no more backbone than a chocolate éclair.",
+    "#target# has no more backbone than a chocolate ï¿½clair.",
     "#target#'s mother should have thrown him away and kept the stork.",
     "I never forget a face, but in #target#s case I'll make an exception.",
     "Some cause happiness wherever they go; #target#, whenever they go.",
@@ -320,8 +315,8 @@
     "#target# is a featherless biped.",
     "If #target# can't be a good example, #target# will have to be a terrible warning.",
     "#target#. A most notable coward, an infinite and endless liar, an hourly promise breaker, the owner of no one good quality.",
-    "Go, #target, prick thy face, and over-red thy fear, Thou lily-liver’d boy.",
-    "#target# is pigeon-liver’d and lacks gall.",
+    "Go, #target, prick thy face, and over-red thy fear, Thou lily-livered boy.",
+    "#target# is pigeon-liverï¿½d and lacks gall.",
     "#target# met with regiment leaders to showcase #target#'s strategic expertise. The meeting lasted 90 seconds.",
     "#target#, thou art a knave; a rascal; an eater of broken meats; a base, proud, shallow, beggarly, three-suited, hundred-pound, filthy, worsted-stocking knave; a lily-livered, action-taking knave, a whoreson, glass-gazing, super-serviceable finical rogue; one-trunk-inheriting slave; one that wouldst be a bawd, in way of good service, and art nothing but the composition of a knave, beggar, coward, pandar, and the son and heir of a mongrel bitch: one whom I will beat into clamorous whining, if thou deniest the least syllable of thy addition.",
     "#target# will always try to do the right thing, after #target#'s tried everything else.",
@@ -334,14 +329,14 @@
     "#target# is not the stupidiest person on earth, but they should better hope that person doesn't die.",
     "#target# looks nice on a night battle.",
     "#target# has the charm and charisma of a burning orphanage.",
-    "#target#, I don’t have the time or the crayons to explain this to you.",
+    "#target#, I donï¿½t have the time or the crayons to explain this to you.",
     "If stupidity could fly #target# would be an airport.",
-    "#target#'s face is so oily that I’m surprised America hasn’t invaded yet.",
+    "#target#'s face is so oily that I'm surprised America hasn't invaded yet.",
     "If there was a contest for losers #target# would be in second place.",
     "#target# is the human embodiment of an eight-dollar haircut.",
-    "#target# is so inbred they’re a sandwich.",
+    "#target# is so inbred they're a sandwich.",
     "From the shoulders up #target# almost looks athletic.",
-    "If I wanted to kill myself, I’d jump from #target#'s ego to #target#'s IQ.",
+    "If I wanted to kill myself, I'd jump from #target#'s ego to #target#'s IQ.",
     "#target# has the processing power of a beached jellyfish.",
     "#target# looks exhausting.",
     "If dumb was dirt #target# would cover seven acres.",
