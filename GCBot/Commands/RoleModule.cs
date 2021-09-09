@@ -215,7 +215,7 @@ namespace GCBot.Commands
                 {
                     if (userRole.Name == r.LongName)
                     {
-                        await ReplyAsync($"The user you're trying to add to your regiment is already in another regiment. Talk with the representative officer of {regiment.LongName}");
+                        await ReplyAsync($"The user you're trying to add to your regiment is already in another regiment. Talk with the representative officer of {userRole.Name}");
                         return;
                     }
                 }
@@ -323,7 +323,7 @@ namespace GCBot.Commands
                         result += "\r\n";
                     result += $"{user.Username} no longer belongs to {currentRole.Name}.";
                 }
-                if (currentRole.Name=="USA" || currentRole.Name=="CSA")
+                if (Enum.GetNames(typeof(Faction)).Contains(currentRole.Name))
                 {
                     await (user as SocketGuildUser).RemoveRoleAsync(currentRole);
                     if (result != "")

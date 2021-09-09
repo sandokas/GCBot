@@ -9,7 +9,7 @@ using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
 using System.Threading.Tasks;
 
-namespace GCBot
+namespace GCBot.Commands
 {
 
     // Keep in mind your module **must** be public and inherit ModuleBase.
