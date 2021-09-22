@@ -33,13 +33,19 @@ namespace GCBot.Commands
         {
             if (Context.Channel.Name != lists.BotChannel)
                 return;
-
-            if (!lists.AutoRoles.Contains(roleName))
+            var realRoleName = lists.AutoRoles.FirstOrDefault(x => x.ToUpperInvariant() == roleName.ToUpperInvariant());
+            if (string.IsNullOrWhiteSpace(realRoleName))
             {
                 await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ",lists.AutoRoles)}.");
                 return;
             }
-            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == roleName);
+            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == realRoleName);
+            if (role == null)
+            {
+                await ReplyAsync($"Role could not be found {realRoleName}.");
+                return;
+            }
+
             var user = (SocketGuildUser)Context.User;
             await user.AddRoleAsync(role);
             await ReplyAsync($"Added {role.Name} to {user.Username}");
@@ -54,15 +60,23 @@ namespace GCBot.Commands
             if (Context.Channel.Name != lists.BotChannel)
                 return;
 
-            if (!lists.AutoRoles.Contains(roleName))
+            var realRoleName = lists.AutoRoles.FirstOrDefault(x => x.ToUpperInvariant() == roleName.ToUpperInvariant());
+
+            if (string.IsNullOrWhiteSpace(realRoleName))
             {
                 await ReplyAsync($"That role is not available to pick with this command. Current roles available: {String.Join(", ", lists.AutoRoles)}.");
                 return;
             }
-            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == roleName);
+            var role = Context.Guild.Roles.FirstOrDefault(r => r.Name == realRoleName);
+            if (role == null)
+            {
+                await ReplyAsync($"Role could not be found {realRoleName}.");
+                return;
+            }
+
             var user = (SocketGuildUser)Context.User;
             await user.RemoveRoleAsync(role);
-            await ReplyAsync($"Removed {roleName} from {user.Username}");
+            await ReplyAsync($"Removed {role.Name} from {user.Username}");
         }
 
         [Command("listregiments")]
